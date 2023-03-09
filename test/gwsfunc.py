@@ -106,6 +106,7 @@ class GoogleWorkspaceFunc:
             print(f'An error occurred: {error}') 
             items = None 
 
+    @staticmethod
     def uploadFile(creds, filepath):
 
         filepath = F'{os.path.dirname(__file__)}\\{filepath}'
