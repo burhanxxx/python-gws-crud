@@ -1,5 +1,6 @@
 # author: Muhammad Burhan Bin Din
 # description: Google Workspace python function to list, upload, download, delete, and etc
+# python version: 3.10.10
 # Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -91,8 +92,7 @@ class GoogleWorkspaceFunc:
             service = build('drive', 'v3', credentials=creds)
 
             # Call the Drive v3 API
-            results = service.files().list(
-                pageSize=10, fields="nextPageToken, files(id, name)").execute()
+            results = service.files().list(pageSize=1000, fields="nextPageToken, files(id, name, mimeType)").execute()
             items = results.get('files', [])
 
             if not items:
@@ -105,6 +105,8 @@ class GoogleWorkspaceFunc:
             # TODO(developer) - Handle errors from drive API.
             print(f'An error occurred: {error}') 
             items = None 
+
+        return items
 
     @staticmethod
     def uploadFile(creds, filepath):
